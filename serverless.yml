@@ -1,0 +1,23 @@
+service: serverless-example
+
+useDotNet: true
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  environment:
+    DBURI: mongodb+srv://arwiz:Wizni12345@cluster0.kfbxgoq.mongodb.net/poker_app?retryWrites=true&w=majority
+
+functions:
+  main:
+    handler: dist/serverless.handler
+    events:
+      - http:
+          method: ANY
+          path: /
+      - http:
+          method: ANY
+          path: '{proxy+}'
